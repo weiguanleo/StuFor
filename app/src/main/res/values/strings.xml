@@ -10,4 +10,8 @@
     <string name="feed">Feed</string>
     <string name="notifications">Notifications</string>
     <string name="all">All</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t have an account? Sign up here!</string>
 </resources>
