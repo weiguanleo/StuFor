@@ -1,7 +1,7 @@
-package com.example.stufor
+package com.example.stufor.util
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.stufor.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
