@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "89985778924",
+    "project_id": "stufor-29169",
+    "storage_bucket": "stufor-29169.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89985778924:android:b0ec41544394ad9d8fd1c9",
+        "android_client_info": {
+          "package_name": "com.example.stufor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89985778924-4sihokcshm089f07ghhonsc0cjkp6184.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACxlwTKqhk7m6W7yKIY1anyM4Xlpi6PzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89985778924-4sihokcshm089f07ghhonsc0cjkp6184.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
