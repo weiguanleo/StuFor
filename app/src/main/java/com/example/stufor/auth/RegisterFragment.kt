@@ -116,7 +116,7 @@ class RegisterFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // creating object of User data class and passing the data to cloud firestore
-                        val user = User(auth.currentUser?.uid!!, email)
+                        val user = User(auth.currentUser?.uid!!, null, email)
                         // instance of firestore cloud storage
                         val firestore = FirebaseFirestore.getInstance().collection("Users")
                         // setting user's details in new collection "Users"
