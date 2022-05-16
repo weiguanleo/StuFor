@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.stufor.R
 import com.example.stufor.databinding.FragmentLoginBinding
-import com.example.stufor.util.MainActivity
+import com.example.stufor.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {

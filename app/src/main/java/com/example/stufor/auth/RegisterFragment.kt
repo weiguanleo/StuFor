@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.stufor.R
 import com.example.stufor.databinding.FragmentRegisterBinding
 import com.example.stufor.model.User
-import com.example.stufor.util.MainActivity
+import com.example.stufor.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -48,6 +48,7 @@ class RegisterFragment : Fragment() {
 
         binding.btnSignUp.setOnClickListener {
             val email = binding.editTextEmail.editText?.text.toString()
+            val username = binding.editTextUsername.editText?.text.toString()
             val password = binding.editTextPassword.editText?.text.toString()
             val confirmPassword = binding.editTextConfirmPassword.editText?.text.toString()
 
@@ -56,6 +57,7 @@ class RegisterFragment : Fragment() {
              */
 
             binding.editTextEmail.error = null
+            binding.editTextUsername.error = null
             binding.editTextPassword.error = null
             binding.editTextConfirmPassword.error = null
 
@@ -71,6 +73,15 @@ class RegisterFragment : Fragment() {
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.editTextEmail.error = "Enter a valid email address."
+                return@setOnClickListener
+            }
+
+            /*
+            Check whether username field is empty or not?
+             */
+
+            if (TextUtils.isEmpty(username)) {
+                binding.editTextUsername.error = "Username is required."
                 return@setOnClickListener
             }
 
@@ -116,7 +127,7 @@ class RegisterFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // creating object of User data class and passing the data to cloud firestore
-                        val user = User(auth.currentUser?.uid!!, null, email)
+                        val user = User(auth.currentUser?.uid!!, email, username)
                         // instance of firestore cloud storage
                         val firestore = FirebaseFirestore.getInstance().collection("Users")
                         // setting user's details in new collection "Users"

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stufor.R
 import com.example.stufor.model.Post
+import com.example.stufor.CommentsActivity
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +28,7 @@ class FeedAdapter(options: FirestoreRecyclerOptions<Post>, val context: Context)
     class FeedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val content: TextView = itemView.findViewById(R.id.textViewContent)
         val likeIcon: ImageView = itemView.findViewById(R.id.likePostButton)
-        val commentIcon: ImageView = itemView.findViewById(R.id.likePostButton)
+        val commentIcon: ImageView = itemView.findViewById(R.id.commentPostButton)
         val likeCount: TextView = itemView.findViewById(R.id.likePostCount)
         val commentCount: TextView = itemView.findViewById(R.id.commentPostCount)
         val authorText: TextView = itemView.findViewById(R.id.textViewAuthor)

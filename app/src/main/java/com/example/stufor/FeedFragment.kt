@@ -1,4 +1,4 @@
-package com.example.stufor.util
+package com.example.stufor
 
 import android.content.Intent
 import android.os.Bundle

@@ -6,9 +6,9 @@
         android:icon="@android:drawable/btn_star"
         android:title="@string/feed" />
     <item
-        android:id="@+id/category_item"
+        android:id="@+id/following_item"
         android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="@string/category" />
+        android:title="@string/following" />
     <item
         android:id="@+id/notifications_item"
         android:icon="@android:drawable/stat_notify_chat"
