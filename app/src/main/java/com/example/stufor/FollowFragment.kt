@@ -68,8 +68,8 @@ class FollowFragment : Fragment() {
                 recyclerView.visibility = View.VISIBLE
                 val firestore = FirebaseFirestore.getInstance()
                 val newQuery = firestore.collection("Users")
-                    .whereEqualTo("name", query)
-                    .whereNotEqualTo("id", UserUtil.user?.id)
+                    .whereEqualTo("username", query)
+                    .whereNotEqualTo("id", UserUtil.user?.id) // Exclude current user from search
 
                 val newRecyclerViewOptions =
                     FirestoreRecyclerOptions.Builder<User>().setQuery(newQuery, User::class.java)

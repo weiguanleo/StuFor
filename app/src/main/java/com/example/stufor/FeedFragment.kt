@@ -2,19 +2,21 @@ package com.example.stufor
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stufor.adapters.FeedAdapter
 import com.example.stufor.databinding.FragmentFeedBinding
 import com.example.stufor.model.Post
+import com.example.stufor.model.User
+import com.example.stufor.util.UserUtil
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class FeedFragment: Fragment() {
 
@@ -45,7 +47,7 @@ class FeedFragment: Fragment() {
 
     private fun setUpRecyclerView() {
         val firestore = FirebaseFirestore.getInstance()
-        val query = firestore.collection("Posts")
+        val query = firestore.collection("Posts").orderBy("time")
 
         val recyclerViewOptions =
             FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java).build()

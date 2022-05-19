@@ -48,13 +48,13 @@ class FollowAdapter(options: FirestoreRecyclerOptions<User>, val context: Contex
                         user?.let {_user ->
                             userDocument.set(_user)
                         }
-                        holder.followButton.text = "Follow"
+                        holder.followButton.text = context.getString(R.string.follow)
                     } else {
                         user?.following?.add(snapshots.getSnapshot(holder.absoluteAdapterPosition).id)
                         user?.let {_user ->
                             userDocument.set(_user)
                         }
-                        holder.followButton.text = "Following"
+                        holder.followButton.text = context.getString(R.string.following)
                     }
                 } else {
                     Toast.makeText(

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stufor.R
 import com.example.stufor.model.Post
 import com.example.stufor.CommentsActivity
+import com.example.stufor.model.Like
+import com.example.stufor.util.UserUtil
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -44,10 +46,8 @@ class FeedAdapter(options: FirestoreRecyclerOptions<Post>, val context: Context)
 
         holder.content.text = model.content
         holder.authorText.text = model.author.username
-        holder.likeCount.text = model.likeList.size.toString()
 
         val firestore = FirebaseFirestore.getInstance()
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
         val postDocument =
             firestore.collection("Posts")
@@ -59,61 +59,38 @@ class FeedAdapter(options: FirestoreRecyclerOptions<Post>, val context: Context)
             }
         }
 
-        postDocument.get().addOnCompleteListener {
+        postDocument.collection("Likes").get().addOnCompleteListener {
             if (it.isSuccessful) {
-                if (it.isSuccessful) {
-                    val post = it.result?.toObject(Post::class.java)
-                    post?.likeList?.let { list ->
-                        if (list.contains(userId)) {
-                            holder.likeIcon.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    context,
-                                    R.drawable.icon_like_fill
-                                )
-                            )
-                        } else {
-                            holder.likeIcon.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    context,
-                                    R.drawable.like_icon_outline
-                                )
-                            )
-                        }
-                        holder.likeIcon.setOnClickListener {
-                            if (post.likeList.contains(userId)) {
-                                post.likeList.remove(userId)
-                                holder.likeIcon.setImageDrawable(
-                                    ContextCompat.getDrawable(
-                                        context,
-                                        R.drawable.like_icon_outline
-                                    )
-                                )
-                            } else {
-                                userId?.let { userId ->
-                                    post.likeList.add(userId)
-                                }
-                                holder.likeIcon.setImageDrawable(
-                                    ContextCompat.getDrawable(
-                                        context,
-                                        R.drawable.icon_like_fill
-                                    )
-                                )
-                            }
-                        }
-                        postDocument.set(post)
-                    }
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Something went wrong! Please try again.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                holder.likeCount.text = it.result?.size().toString()
             }
+        }
+
+        postDocument.get().addOnCompleteListener {
+            //comment feature
             holder.commentIcon.setOnClickListener {
                 val intent = Intent(context, CommentsActivity::class.java)
                 intent.putExtra("postId", snapshots.getSnapshot(holder.absoluteAdapterPosition).id)
                 context.startActivity(intent)
+            }
+            holder.likeIcon.setOnClickListener {
+                val like = Like(UserUtil.user!!)
+                postDocument.collection("Likes")
+                    .document().set(like)
+
+                holder.likeIcon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.icon_like_fill
+                    )
+                )
+                postDocument.collection("Likes").get().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        var likeCount = it.result?.size()?.minus(1)
+                        if (likeCount != null) {
+                            holder.likeCount.text = (likeCount + 1).toString()
+                        }
+                    }
+                }
             }
         }
     }

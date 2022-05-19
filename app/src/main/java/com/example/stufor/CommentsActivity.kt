@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stufor.R
 import com.example.stufor.adapters.CommentAdapter
 import com.example.stufor.databinding.ActivityCommentsBinding
 import com.example.stufor.model.Comment
@@ -45,7 +44,7 @@ class CommentsActivity : AppCompatActivity() {
     private fun setUpRecyclerView() {
         val firestore = FirebaseFirestore.getInstance()
         val query = postId?.let{
-            firestore.collection("Posts").document(it).collection("Comments")
+            firestore.collection("Posts").document(it).collection("Comments").orderBy("time")
         }
         val recyclerViewOptions = query?.let {
             FirestoreRecyclerOptions.Builder<Comment>().setQuery(it, Comment::class.java).build()

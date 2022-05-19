@@ -42,7 +42,6 @@ class RegisterFragment : Fragment() {
         binding.textViewLogin.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.authFragmentContainer, LoginFragment())
-                .addToBackStack(null)
                 .commit()
         }
 
@@ -55,11 +54,11 @@ class RegisterFragment : Fragment() {
             /*
             Setting all input fields error to null
              */
-
             binding.editTextEmail.error = null
             binding.editTextUsername.error = null
             binding.editTextPassword.error = null
             binding.editTextConfirmPassword.error = null
+
 
             /*
             Check whether email field is empty or not?

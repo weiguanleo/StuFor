@@ -38,7 +38,6 @@ class LoginFragment : Fragment() {
         binding.textViewSignUp.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.authFragmentContainer, RegisterFragment())
-                .addToBackStack(null)
                 .commit()
         }
 
